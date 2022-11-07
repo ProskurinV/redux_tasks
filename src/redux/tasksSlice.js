@@ -52,13 +52,3 @@ const tasksSlice = createSlice({
 
 export const { addTask, deleteTask, toggleCompleted } = tasksSlice.actions;
 export const tasksReducer = tasksSlice.reducer;
-
-// setAllCompleted(state, action) {
-//       return state.map(task => {
-//         if (action.payload) {
-//           return task.completed ? task : { ...task, completed: true };
-//         }
-
-//         return !task.completed ? task : { ...task, completed: false };
-//       });
-//     },

@@ -3,14 +3,15 @@ import css from './StatusFilter.module.css';
 // Импортируем хук
 import { useSelector, useDispatch } from 'react-redux';
 // Импортируем генератор экшена
-import { setStatusFilter } from '../../redux/actions';
+import { setStatusFilter } from '../../redux/filtersSlice';
 // Импортируем объект значений фильтра
 import { statusFilters } from '../../redux/constants';
+import { getStatusFilter } from 'redux/selectors';
 
 export const StatusFilter = () => {
   // Получаем ссылку на функцию отправки экшенов
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.filters.status);
+  const filter = useSelector(getStatusFilter);
   // Вызываем генератор экшена и передаём значение фильтра
   // Отправляем результат - экшен изменения фильтра
   const handleFilterChange = filter => dispatch(setStatusFilter(filter));
