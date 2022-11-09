@@ -1,9 +1,4 @@
 import axios from 'axios';
-// import {
-//   fetchingInProgress,
-//   fetchingSuccess,
-//   fetchingError,
-// } from './tasksSlice';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://62584f320c918296a49543e7.mockapi.io';
@@ -15,10 +10,10 @@ export const fetchTasks = createAsyncThunk(
       const response = await axios.get('/tasks');
       // При успешном запросе возвращаем промис с данными
       return response.data;
-    } catch (e) {
+    } catch (error) {
       // При ошибке запроса возвращаем промис
       // который будет отклонен с текстом ошибки
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -37,9 +32,9 @@ export const addTask = createAsyncThunk(
 
 export const deleteTask = createAsyncThunk(
   'tasks/deleteTask',
-  async (task, thunkAPI) => {
+  async (taskId, thunkAPI) => {
     try {
-      const response = await axios.delete(`tasks/ ${task.Id}`);
+      const response = await axios.delete(`/tasks/${taskId}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -51,7 +46,7 @@ export const toggleCompleted = createAsyncThunk(
   'tasks/toggleCompleted',
   async (task, thunkAPI) => {
     try {
-      const response = await axios.put(`tasks/ ${task.Id}`, {
+      const response = await axios.put(`/tasks/${task.id}`, {
         completed: !task.completed,
       });
       return response.data;
@@ -60,17 +55,3 @@ export const toggleCompleted = createAsyncThunk(
     }
   }
 );
-
-// export const fetchTasks = () => async dispatch => {
-//   try {
-//     // Индикатор загрузки
-//     dispatch(fetchingInProgress());
-//     // HTTP-запрос
-//     const response = await axios.get('/tasks');
-//     // Обработка данных
-//     dispatch(fetchingSuccess(response.data));
-//   } catch (e) {
-//     // Обработка ошибки
-//     dispatch(fetchingError(e.message));
-//   }
-// };
