@@ -3,7 +3,7 @@ import css from './TaskForm.module.css';
 // Импортируем хук
 import { useDispatch } from 'react-redux';
 // Импортируем генератор экшена
-import { addTask } from '../../redux/tasksSlice';
+import { addTask } from '../../redux/operations';
 
 export const TaskForm = () => {
   // Получаем ссылку на функцию отправки экшенов

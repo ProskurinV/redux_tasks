@@ -1,9 +1,10 @@
 import css from './TaskCounter.module.css';
 // Импортируем хук
 import { useSelector } from 'react-redux';
+import { getTasks } from 'redux/selectors';
 
 export const TaskCounter = () => {
-  const tasks = useSelector(state => state.tasks);
+  const tasks = useSelector(getTasks);
 
   // На базе состояния Redux получаем производные данные
   const count = tasks.reduce(
