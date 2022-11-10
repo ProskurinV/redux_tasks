@@ -1,4 +1,4 @@
-import { createSlice, isAllOf, isAnyOf } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { fetchTasks, addTask, deleteTask, toggleCompleted } from './operations';
 
 const extraActions = [fetchTasks, addTask, deleteTask, toggleCompleted];
@@ -53,7 +53,7 @@ const tasksSlice = createSlice({
       )
       .addMatcher(isAnyOf(...getActionsWithType('pending')), anyPendingReducer)
       .addMatcher(
-        isAllOf(...getActionsWithType('rejected')),
+        isAnyOf(...getActionsWithType('rejected')),
         anyRejectedReducer
       ),
 });
